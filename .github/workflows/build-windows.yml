@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: source
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -27,12 +25,11 @@ jobs:
         run: python -m pip install telethon pyinstaller
 
       - name: Build EXE
-        working-directory: source
         run: pyinstaller --noconfirm --clean --onefile --console --name TelegramTracker --collect-all telethon tracker.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: TelegramTracker-Windows
-          path: source/dist/TelegramTracker.exe
+          path: dist/TelegramTracker.exe
           retention-days: 14
